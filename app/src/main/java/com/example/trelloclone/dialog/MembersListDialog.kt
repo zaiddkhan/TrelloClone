@@ -1,0 +1,51 @@
+package com.example.trelloclone.dialog
+
+import android.app.Dialog
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.trelloclone.R
+import com.example.trelloclone.adapters.MembersActivityAdapter
+import com.example.trelloclone.models.User
+import java.security.acl.LastOwnerException
+
+abstract class MembersListDialog (
+    context: Context,
+    private var list:ArrayList<User>,
+    private val title:String=""
+        ):Dialog(context){
+            private var adapter:MembersActivityAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_list,null)
+
+        setContentView(view)
+        setCanceledOnTouchOutside(true)
+        setCancelable(true)
+        setUpRecyclerView(view)
+    }
+
+    private fun setUpRecyclerView(view:View){
+
+        view.findViewById<TextView>(R.id.tvTitle).text = title
+        if(list.size>0){
+            view.findViewById<RecyclerView>(R.id.rvList).layoutManager = LinearLayoutManager(context)
+            adapter = MembersActivityAdapter(context,list)
+            view.findViewById<RecyclerView>(R.id.rvList).adapter = adapter
+
+            adapter!!.setOnClickListener(object:MembersActivityAdapter.OnClickListener{
+                override fun onClick(position: Int, user: User, action: String) {
+                    dismiss()
+                    onItemSelected(user,action)
+                }
+            })
+        }
+    }
+    protected abstract fun onItemSelected(user:User,action:String)
+        }
