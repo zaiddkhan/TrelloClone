@@ -1,0 +1,90 @@
+{
+  ConstraintSets :  {
+    start : {
+      profile_pic : {
+        width: 40,
+        height: 40,
+        start: ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+      },
+      username : {
+        top: ['profile_pic', 'top'],
+        bottom: ['profile_pic', 'bottom', 0],
+        start: ['profile_pic', 'end', 16],
+      },
+      details : {
+        visibility: 'invisible',
+        height: 0,
+        start: ['parent', 'start', 0],
+        top: ['parent', 'top', 0],
+        end: ['parent', 'end', 0]
+      },
+      box : {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        top: ['parent', 'top'],
+        bottom: ['profile_pic', 'bottom',-16],
+      },
+      content : {
+        width: 'wrap',
+        height: 'spread',
+        start: ['parent', 'start', 0],
+        top: ['box', 'bottom', 0],
+        end: ['parent', 'end', 0],
+        bottom: ['parent', 'bottom', 0],
+      }
+    },
+    end : {
+      profile_pic : {
+        width: 120,
+        height: 120,
+        start: ['parent', 'start',16],
+        top: ['parent', 'top', 16],
+      },
+      username : {
+        top: ['profile_pic', 'bottom',16],
+        start: ['parent', 'start',16],
+      },
+      details: {
+        visibility: 'visible',
+        start: ['parent', 'start', 90],
+        top: ['parent', 'top', 45],
+        end: ['parent', 'end']
+      },
+      box : {
+        width: "spread",
+        height: "spread",
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        top: ['parent', 'top', 0],
+        bottom: ['profile_pic', 'bottom', -60],
+
+      },
+      content : {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start', 0],
+        top: ['box', 'bottom', 0],
+        end: ['parent', 'end', 0],
+        bottom: ['parent', 'bottom', 0],
+      }
+    }
+  },
+  Transitions : {
+  default : {
+    from: 'start',
+    to: 'end',
+    pathMotionArc: 'startHorizontal',
+    KeyFrames: {
+      KeyAttributes: [
+        {
+          target: ['profile_pic'],
+          frames: [0,100]
+      }
+      ],
+    }
+  }
+}
+}
